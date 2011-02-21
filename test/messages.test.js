@@ -13,7 +13,7 @@ module.exports = {
   'test messages dynamic helper': function(assert){
     var app = express.createServer(
       express.cookieDecoder(),
-      express.session({ store: store })
+      express.session({ secret: 'wahoo', store: store })
     );
     app.set('views', __dirname + '/fixtures');
     app.dynamicHelpers({ messages: messages });
