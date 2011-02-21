@@ -5,6 +5,12 @@ The _express-messages_ module provides flash notification rendering. To use simp
 
     app.dynamicHelpers({ messages: require('express-messages') });
 
+## Installation
+
+    $ npm instal express-messages
+
+## Usage
+
 Then in a view you may output the notifications:
 
     <%- messages() %>
