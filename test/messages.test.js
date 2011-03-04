@@ -4,16 +4,13 @@
  */
 
 var express = require('express')
-  , messages = require('../')
-  , MemoryStore = require('connect').session.MemoryStore;
-
-var store = new MemoryStore({ reapInterval: -1 });
+  , messages = require('../');
 
 module.exports = {
   'test messages dynamic helper': function(assert){
     var app = express.createServer(
-      express.cookieDecoder(),
-      express.session({ secret: 'wahoo', store: store })
+      express.cookieParser(),
+      express.session({ secret: 'wahoo' })
     );
     app.set('views', __dirname + '/fixtures');
     app.dynamicHelpers({ messages: messages });
