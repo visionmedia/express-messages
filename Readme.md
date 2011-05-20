@@ -1,4 +1,3 @@
-
 # Express Messages
       
 The _express-messages_ module provides flash notification rendering. To use simply assign it to a dynamic helper:
@@ -7,7 +6,7 @@ The _express-messages_ module provides flash notification rendering. To use simp
 
 ## Installation
 
-    $ npm instal express-messages
+    $ npm install express-messages
 
 ## Usage
 
