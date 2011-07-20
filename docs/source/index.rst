@@ -10,7 +10,8 @@ Installation
 
     $ npm instal express-messages
 
-## Usage
+Usage
+-----
 
 Then in a view you may output the notifications:
 
