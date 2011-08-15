@@ -4,10 +4,11 @@
  */
 
 var express = require('express')
-  , messages = require('../');
+  , messages = require('../')
+  , assert = require('assert');
 
 module.exports = {
-  'test messages dynamic helper': function(assert){
+  'test messages dynamic helper': function(){
     var app = express.createServer(
       express.cookieParser(),
       express.session({ secret: 'wahoo' })
