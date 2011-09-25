@@ -10,9 +10,15 @@ The _express-messages_ module provides flash notification rendering. To use simp
 
 ## Usage
 
-Then in a view you may output the notifications:
+Then in a view you may output the notifications based on your templating engine:
+
+### [EJS](https://github.com/visionmedia/ejs)
 
     <%- messages() %>
+
+### [Jade](http://jade-lang.com/)
+
+    != messages()
 
 Which outputs HTML as shown below:
 
