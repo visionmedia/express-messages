@@ -18,8 +18,7 @@ Then in a view you may output the notifications based on your templating engine:
 
 ### [Jade](http://jade-lang.com/)
 
-    - var m = messages()
-    != m
+    != messages()
 
 Which outputs HTML as shown below:
 
