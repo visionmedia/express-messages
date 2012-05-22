@@ -10,6 +10,10 @@ The _express-messages_ module provides flash notification rendering. To use simp
 
 ## Usage
 
+On the server, add messages like this:
+
+    req.flash("info", "herp derp %s", something)
+
 Then in a view you may output the notifications based on your templating engine:
 
 ### [EJS](https://github.com/visionmedia/ejs)
