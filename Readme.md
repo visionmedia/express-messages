@@ -1,13 +1,13 @@
 # Express Messages
-      
-The _express-messages_ module provides flash notification rendering. 
+
+The _express-messages_ module provides flash notification rendering.
 
 ### Express 2.x
 
 To use simply assign it to a dynamic helper:
 
     app.dynamicHelpers({ messages: require('express-messages') });
-    
+
 ### Express 3+
 
 Install [connect-flash](https://github.com/jaredhanson/connect-flash) and add them as middleware:
@@ -52,17 +52,37 @@ Which outputs HTML as shown below:
       </ul>
     </div>
 
+## Using a custom template
+
+Alternatively, you can specify a custom template (a file in the views directory of your [Express](http://expressjs.com) app) and options:
+
+### [EJS](https://github.com/visionmedia/ejs)
+
+    <%- messages('myTemplate', options) %>
+
+### [Jade](http://jade-lang.com/)
+
+    != messages('myTemplate', options)
+
+For example, the Jade template
+
+    ul.messages
+      each message in messages
+        li(class="#{message.type}")= message.message
+
+would produce the following HTML:
+
+    <ul class="messages">
+      <li class="info">Email queued</li>
+      <li class="info">Email sent</li>
+      <li class="error">Email delivery failed</li>
+    </ul>
+
 ## Running Tests
 
-First make sure you have the submodules:
+    $ npm test
 
-    $ git submodule update --init
-
-Then run the tests:
-
-    $ make test
-
-## License 
+## License
 
 (The MIT License)
 
