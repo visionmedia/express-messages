@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/visionmedia/express-messages.git"
+    "url": "https://github.com/expressjs/express-messages.git"
   },
   "scripts": {
     "test": "./node_modules/.bin/tape test/messages.js | node_modules/.bin/tap-spec"
