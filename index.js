@@ -6,21 +6,16 @@
  */
 
 module.exports = function (req, res) {
-  return function (template, options) {
+  return function (template, locals) {
     var flash = req.flash()
       , types = Object.keys(flash)
       , output = '';
 
     if (types.length) {
       if (template) {
-        options = options || {};
-        options.messages = types.reduce(function (msgs, type) {
-          flash[type].forEach(function (msg) {
-            msgs.push({ type: type, message: msg });
-          });
-          return msgs;
-        }, []);
-        res.render(template, options, function (err, html) {
+        locals = locals || {};
+        locals.messages = flash;
+        res.render(template, locals, function (err, html) {
           if (html) {
             output = html;
           }

@@ -81,11 +81,15 @@ test('default template', function (t) {
 
 test('custom template', function (t) {
   var html = [
-      '<ul class="messages">'
-    , '  <li class="info">info one</li>'
-    , '  <li class="info">info two</li>'
-    , '  <li class="error">error one</li>'
-    , '</ul>'
+      '<div id="messages">'
+    , '  <ul class="info">'
+    , '    <li>info one</li>'
+    , '    <li>info two</li>'
+    , '  </ul>'
+    , '  <ul class="error">'
+    , '    <li>error one</li>'
+    , '  </ul>'
+    , '</div>'
   ].join('\n');
 
   app.get('/nonempty/custom', function (req, res) {

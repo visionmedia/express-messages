@@ -54,29 +54,34 @@ Which outputs HTML as shown below:
 
 ## Using a custom template
 
-Alternatively, you can specify a custom template (a file in the views directory of your [Express](http://expressjs.com) app) and options:
+Alternatively, you can specify a custom template (a file in the views directory of your [Express](http://expressjs.com) app) and locals:
 
 ### [EJS](https://github.com/visionmedia/ejs)
 
-    <%- messages('myTemplate', options) %>
+    <%- messages('myTemplate', locals) %>
 
 ### [Jade](http://jade-lang.com/)
 
-    != messages('myTemplate', options)
+    != messages('myTemplate', locals)
 
-For example, the Jade template
+The template will receive an object called `messages` of the form
 
-    ul.messages
-      each message in messages
-        li(class="#{message.type}")= message.message
+    {
+      "info" : [
+        "Email queued",
+        "Email sent"
+      ],
+      "error": [
+        "Email delivery failed"
+      ]
+    }
+For example, the HTML above can be produced with the following Jade template:
 
-would produce the following HTML:
-
-    <ul class="messages">
-      <li class="info">Email queued</li>
-      <li class="info">Email sent</li>
-      <li class="error">Email delivery failed</li>
-    </ul>
+    .messages
+      each type in Object.keys(messages)
+        ul(class="#{type}")
+          each message in messages[type]
+            li= message
 
 ## Running Tests
 
