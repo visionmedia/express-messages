@@ -2,6 +2,12 @@
 
 The _express-messages_ module provides flash notification rendering.
 
+## Installation
+
+    $ npm install express-messages
+
+## Usage
+
 ### Express 2.x
 
 To use simply assign it to a dynamic helper:
@@ -20,27 +26,29 @@ app.use(function (req, res, next) {
 });
 ```
 
-## Installation
+### Adding Messages
 
-    $ npm install express-messages
+On the server:
 
-## Usage
+    req.flash("info", "Email queued", something);
+    req.flash("info", "Email sent", something);
+    req.flash("error", "Email delivery failed", something);
 
-On the server, add messages like this:
+For further information see [connect-flash](https://github.com/jaredhanson/connect-flash).
 
-    req.flash("info", "herp derp %s", something)
+### Rendering Messages
 
-Then in a view you may output the notifications based on your templating engine:
+Call the `messages()` function as specified by your rendering engine:
 
-### [EJS](https://github.com/visionmedia/ejs)
+[EJS](https://github.com/visionmedia/ejs):
 
     <%- messages() %>
 
-### [Jade](http://jade-lang.com/)
+[Jade](http://jade-lang.com/):
 
     != messages()
 
-Which outputs HTML as shown below:
+Which will output the HTML:
 
     <div id="messages">
       <ul class="info">
@@ -54,17 +62,17 @@ Which outputs HTML as shown below:
 
 ## Using a custom template
 
-Alternatively, you can specify a custom template (a file in the views directory of your [Express](http://expressjs.com) app) and locals:
+Alternatively you can specify a custom template (a file in the views directory of your [Express](http://expressjs.com) app) and locals:
 
-### [EJS](https://github.com/visionmedia/ejs)
+[EJS](https://github.com/visionmedia/ejs):
 
     <%- messages('myTemplate', locals) %>
 
-### [Jade](http://jade-lang.com/)
+[Jade](http://jade-lang.com/):
 
     != messages('myTemplate', locals)
 
-The template will receive an object called `messages` of the form
+The template will receive an object called `messages` of the form:
 
     {
       "info" : [
@@ -74,8 +82,9 @@ The template will receive an object called `messages` of the form
       "error": [
         "Email delivery failed"
       ]
-    }
-For example, the HTML above can be produced with the following Jade template:
+      }
+
+The preceding HTML could be produced with the Jade template:
 
     .messages
       each type in Object.keys(messages)
