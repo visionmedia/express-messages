@@ -5,27 +5,39 @@
  * MIT Licensed
  */
 
-module.exports = function(req, res){
-  return function(){
-    var buf = []
-      , messages = req.flash()
-      , types = Object.keys(messages)
-      , len = types.length;
-    if (!len) return '';
-    buf.push('<div id="messages">');
-    for (var i = 0; i < len; ++i) {
-      var type = types[i]
-        , msgs = messages[type];
-      if (msgs) {
-        buf.push('  <ul class="' + type + '">');
-        for (var j = 0, l = msgs.length; j < l; ++j) {
-          var msg = msgs[j];
-          buf.push('    <li>' + msg + '</li>');
-        }
-        buf.push('  </ul>');
+module.exports = function (req, res) {
+  return function (template, locals) {
+    var flash = req.flash()
+      , types = Object.keys(flash)
+      , output = '';
+
+    if (types.length) {
+      if (template) {
+        locals = locals || {};
+        locals.messages = flash;
+        res.render(template, locals, function (err, html) {
+          if (html) {
+            output = html;
+          }
+        });
+      } else {
+        var buf = [];
+        buf.push('<div id="messages">');
+        types.forEach(function (type) {
+          var msgs = flash[type];
+          if (msgs) {
+            buf.push('  <ul class="' + type + '">');
+            msgs.forEach(function (msg) {
+              buf.push('    <li>' + msg + '</li>');
+            });
+            buf.push('  </ul>');
+          }
+        });
+        buf.push('</div>');
+        output = buf.join('\n');
       }
     }
-    buf.push('</div>');
-    return buf.join('\n');
-  }
+
+    return output;
+  };
 };
