@@ -30,9 +30,9 @@ app.use(function (req, res, next) {
 
 On the server:
 
-    req.flash("info", "Email queued", something);
-    req.flash("info", "Email sent", something);
-    req.flash("error", "Email delivery failed", something);
+    req.flash("info", "Email queued");
+    req.flash("info", "Email sent");
+    req.flash("error", "Email delivery failed");
 
 For further information see [connect-flash](https://github.com/jaredhanson/connect-flash).
 
