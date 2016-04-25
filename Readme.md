@@ -62,17 +62,45 @@ Which will output the HTML:
 
 ## Using a custom template
 
-Alternatively you can specify a custom template (a file in the views directory of your [Express](http://expressjs.com) app) and locals:
+Alternatively you can specify a custom template (a file in the views directory of your [Express](http://expressjs.com) app).
+
+### Add a message template
+
+For example, lets use the below custom message template named `my_message_template`.
+
+[EJS](https://github.com/visionmedia/ejs) (`my_message_template.ejs`):
+
+    <div id="messages">
+    <% Object.keys(messages).forEach(function (type) { %>
+      <ul class="<%= type %>">
+      <% messages[type].forEach(function (message) { %>
+        <li><%= message %></li>
+      <% }) %>
+      </ul>
+    <% }) %>
+    </div>
+
+[Jade](http://jade-lang.com/) (`my_message_template.jade`):
+
+    .messages
+      each type in Object.keys(messages)
+        ul(class="#{type}")
+          each message in messages[type]
+            li= message
+
+### Call the message template
+
+Next, pass the template name, `my_message_template`, as a parameter to the `messages()` function.
 
 [EJS](https://github.com/visionmedia/ejs):
 
-    <%- messages('myTemplate', locals) %>
+    <%- messages('my_message_template', locals) %>
 
 [Jade](http://jade-lang.com/):
 
-    != messages('myTemplate', locals)
+    != messages('my_message_template', locals)
 
-The template will receive an object called `messages` of the form:
+The message template will receive an object called `messages` of the form:
 
     {
       "info" : [
@@ -82,15 +110,7 @@ The template will receive an object called `messages` of the form:
       "error": [
         "Email delivery failed"
       ]
-      }
-
-The preceding HTML could be produced with the Jade template:
-
-    .messages
-      each type in Object.keys(messages)
-        ul(class="#{type}")
-          each message in messages[type]
-            li= message
+    }
 
 ## Running Tests
 
